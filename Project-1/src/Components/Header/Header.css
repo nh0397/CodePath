@@ -1,0 +1,48 @@
+/* Header.css */
+
+.header {
+    background-color: #123;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav ul li {
+    display: inline-block;
+    margin-right: 20px;
+  }
+  
+  .nav ul li a {
+    text-decoration: none;
+    color: #fff;
+  }
+  
+  .nav ul li a:hover {
+    color: #ffc107; /* Change the color on hover */
+  }
+
+  .svg{
+    height: 5vh;
+    width: 5vh;
+  }
+  
+  .text{
+    margin-top: 10px;
+    font-family: cursive;
+    margin-right: 10px;
+  }
