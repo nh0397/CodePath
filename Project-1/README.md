@@ -1,4 +1,4 @@
-# Web Development Project 1 - *CricRealm*
+# Web Development Project 1 - *CricketRealm*
 
 Submitted by: **Naisarg Halvadiya**
 
