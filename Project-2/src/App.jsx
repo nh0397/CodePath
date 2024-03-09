@@ -16,7 +16,7 @@ function App() {
                 </div>
                 <Carousel>
                     {data.map(card => (
-                        <FlipCard  name={card.name} img_url={card.photo}  />
+                        <FlipCard  name={card.name} img_url={card.photo} hint={card.hint} />
                     ))}
                 </Carousel>
                 <div className='header'>
