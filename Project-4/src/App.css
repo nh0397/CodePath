@@ -1,0 +1,95 @@
+.App {
+  text-align: center;
+  padding: 2rem;
+  font-family: 'Arial', sans-serif;
+  background: #f7f7f7;
+  width: 100vw;
+  color: black;
+}
+
+.header {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.discovery-view {
+  max-width: 800px;
+  margin: auto;
+}
+
+.main-image-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.main-image {
+  max-height: 500px; /* Fixed size to prevent bouncing */
+  max-width: 100%;
+  object-fit: contain; /* Prevents distortion */
+}
+
+.info, .ban-list, .history {
+  margin-bottom: 1rem;
+}
+
+button {
+  margin-right: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  border-radius: 0.3rem;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.ban-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px; /* Spacing between chips */
+}
+
+.ban-list-item {
+  background-color: #ff4081;
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.ban-list-item:hover {
+  background-color: #c51162;
+}
+
+.history img {
+  width: 50px;
+  height: 50px;
+  border-radius: 0.3rem;
+  object-fit: cover;
+  transition: transform 0.3s ease; /* Smooth transition for transform property */
+}
+
+.history img:hover {
+  transform: scale(2); /* Scale up the image by 200% on hover */
+}
+
+.photo-info {
+  text-align: left;
+  padding: 0 20px; /* Adjust padding as needed */
+}
+
+.photo-info p {
+  margin: 5px 0;
+}
+
+.photo-attributes{
+  font: 12px;
+  color: #000;
+}
