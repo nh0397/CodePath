@@ -1,0 +1,104 @@
+.pokeBoard {
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.filters {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.searchInput {
+    width: 70%;
+    padding: 10px;
+    font-size: 1em;
+}
+
+.filterButtons button {
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.filterButtons button:not(:last-child) {
+    margin-right: 10px;
+}
+
+.stats {
+    display: flex;
+    flex-wrap: wrap; /* Ensure stats wrap to next line if space is insufficient */
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-size: 0.9em;
+}
+
+.posts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    height: 47vh;
+    overflow: scroll;
+}
+
+.post {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    padding: 10px;
+    text-align: center;
+}
+
+.post img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+}
+
+.post h3 {
+    margin: 0;
+    color: #333;
+}
+
+.details {
+    color: black; /* Ensure text inside cards is black */
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination button {
+    padding: 10px 15px;
+    margin: 0 5px; /* Add padding between pagination buttons */
+    font-size: 1em;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.pagination button:hover {
+    background-color: #0056b3;
+}
+
+.charts{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
