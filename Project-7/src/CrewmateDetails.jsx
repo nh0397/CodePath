@@ -12,6 +12,10 @@ function CrewmateDetails() {
   const { id } = useParams();
   const [crewmate, setCrewmate] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
+  // Assuming your crewmate object has these properties
+  const [editedName, setEditedName] = useState('');
+  const [editedSpeed, setEditedSpeed] = useState('');
+  const [editedColor, setEditedColor] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -28,10 +32,22 @@ function CrewmateDetails() {
       console.error('Error fetching crewmate details', error);
     } else {
       setCrewmate(data);
+      // Set the form fields with existing values
+      setEditedName(data.name);
+      setEditedSpeed(data.speed);
+      setEditedColor(data.color);
     }
   };
 
-  const handleDelete = async () => {
+  // Other handlers remain unchanged...
+ const handleEdit = () => {
+    setIsEditing(true);
+  };
+
+  const handleCancelEdit = () => {
+    setIsEditing(false);
+  };
+   const handleDelete = async () => {
     const { error } = await supabase
       .from('crewmates')
       .delete()
@@ -39,60 +55,78 @@ function CrewmateDetails() {
     if (error) {
       console.error('Error deleting crewmate:', error);
     } else {
-      navigate('/crewmates'); // Navigate to the list of crewmates
+      navigate('/crewmates'); 
     }
-  };
-
-  const handleEdit = () => {
-    setIsEditing(true);
   };
 
   const saveEdit = async (e) => {
     e.preventDefault();
-    // Assuming you have state hooks for each editable field similar to useState
     const { error } = await supabase
       .from('crewmates')
       .update({
-        name: crewmate.name,
-        speed: crewmate.speed,
-        color: crewmate.color,
-        role: crewmate.role,
-        strength: crewmate.strength
+        name: editedName,
+        speed: parseFloat(editedSpeed),
+        color: editedColor
       })
-      .match({ id });
-    
+      .eq('id', id);
+
     if (error) {
       console.error('Error updating crewmate:', error);
     } else {
       setIsEditing(false);
-      fetchCrewmateDetails(); // Re-fetch the crewmate details to show updated info
+      fetchCrewmateDetails();
     }
   };
 
-  if (!crewmate) {
-    return <p>Loading crewmate details...</p>;
-  }
+  // The edit form including the dropdown for the color attribute
+  const renderEditForm = () => (
+    <form onSubmit={saveEdit} className="edit-form">
+      <input
+        type="text"
+        value={editedName}
+        onChange={(e) => setEditedName(e.target.value)}
+      />
+      <input
+        type="number"
+        value={editedSpeed}
+        onChange={(e) => setEditedSpeed(e.target.value)}
+      />
+      <select
+        value={editedColor}
+        onChange={(e) => setEditedColor(e.target.value)}
+      >
+        <option value="">Select Color</option>
+        <option value="red">Red</option>
+        <option value="green">Green</option>
+        <option value="blue">Blue</option>
+        <option value="purple">Purple</option>
+        <option value="yellow">Yellow</option>
+        <option value="orange">Orange</option>
+        <option value="pink">Pink</option>
+        <option value="rainbow">Rainbow</option>
+      </select>
+      <button type="submit">Save Changes</button>
+      <button type="button" onClick={() => setIsEditing(false)}>Cancel</button>
+    </form>
+  );
+
+  // The render function for viewing details
+  const renderCrewmateDetails = () => (
+    <>
+      <h1>{crewmate.name}</h1>
+      <p>Speed: {crewmate.speed}</p>
+      <p>Color: {crewmate.color}</p>
+      <button onClick={handleEdit}>Edit</button>
+      <button onClick={handleDelete}>Delete</button>
+      <button onClick={() => navigate(-1)}>Go Back</button>
+    </>
+  );
+
+  if (!crewmate) return <p>Loading crewmate details...</p>;
 
   return (
     <div className="crewmate-details-container">
-      {isEditing ? (
-        <form onSubmit={saveEdit} className="edit-form">
-          {/* Create form inputs for each field you want to be editable */}
-          <button type="submit">Save Changes</button>
-          <button type="button" onClick={() => setIsEditing(false)}>Cancel</button>
-        </form>
-      ) : (
-        <>
-          <h1>{crewmate.name}</h1>
-          <p>Speed: {crewmate.speed} mph</p>
-          <p>Color: {crewmate.color}</p>
-          <p>Role: {crewmate.role}</p>
-          <p>Strength: {crewmate.strength}</p>
-          <button onClick={handleEdit}>Edit</button>
-          <button onClick={handleDelete}>Delete</button>
-          <button onClick={() => navigate(-1)}>Go Back</button>
-        </>
-      )}
+      {isEditing ? renderEditForm() : renderCrewmateDetails()}
     </div>
   );
 }
