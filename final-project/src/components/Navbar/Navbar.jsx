@@ -1,49 +1,44 @@
-import React, { useState, useEffect } from 'react';
-import { Link,useNavigate } from 'react-router-dom';
+// Navbar.jsx
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 import logo from '../../assets/logo.webp';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
-function Navbar() {
-    const [searchTerm, setSearchTerm] = useState('');
-    const [activeTab, setActiveTab] = useState(null);
-    const [isModalOpen, setModalOpen] = useState(false);
-    const userFirstName = sessionStorage.getItem('firstName') || 'First';  // Default value as placeholder
-    const userLastName = sessionStorage.getItem('lastName') || 'Last';  // Default value as placeholder
-    const userRole = sessionStorage.getItem('role');
+function Navbar(props) {
     const navigate = useNavigate();
-    function getInitials(firstName, lastName) {
-    return `${firstName[0]}${lastName[0]}`;
-}
+    const userFirstName = sessionStorage.getItem('firstName') || 'First';
+    const userLastName = sessionStorage.getItem('lastName') || 'Last';
+    const userRole = sessionStorage.getItem('role');
 
-    useEffect(() => {
-        // Fetch user data if needed or handle post-login actions
-    }, []);
-
-     const handleLogout = () => {
-        sessionStorage.clear();  // Clear the session storage
-        navigate('/');  // Use navigate to redirect to the homepage
+    const getInitials = (firstName, lastName) => {
+        return `${firstName[0]}${lastName[0]}`;
     };
 
+    const handleAddPost = () => {
+        props.toggleModal(); // Toggle modal state
+    };
 
-    const initials = getInitials(userFirstName, userLastName);
+    const handleLogout = () => {
+        sessionStorage.clear();
+        navigate('/');
+    };
 
     return (
         <div className="navbar-container">
             <div className="navbar-left">
                 <Link to="/home" className="home-link">
-                    <div>
-                        <img src={logo} alt="App Logo" className="app-logo" />
-                    </div>
-                    <div className='app-name'>
-                        Discussion Forum  {/* Title next to logo */}    
-                    </div>
+                    <img src={logo} alt="App Logo" className="app-logo" />
+                    <div className='app-name'>Discussion Forum</div>
                 </Link>
             </div>
             <div className="navbar-right">
+                <button className="logout-button addPost" onClick={handleAddPost}>
+                    <FontAwesomeIcon icon={faPlus} /> Add Post
+                </button>
                 <div className="user-info">
-                    <div className="initials-icon">
-                        {initials}
-                    </div>
+                    <div className="initials-icon">{getInitials(userFirstName, userLastName)}</div>
                     <span className="username">{userFirstName}</span>
                     <span className="role">{userRole}</span>
                 </div>
