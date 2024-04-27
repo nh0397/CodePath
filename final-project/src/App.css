@@ -3,6 +3,7 @@
 
 .app {
   text-align: center;
+  overflow: hidden;
 }
 
 .app-header {

@@ -46,10 +46,13 @@ const handleSubmit = async (e) => {
     }
 
     console.log('Login successful:', data);
+    // Store necessary user details in session storage
     sessionStorage.setItem('isAuthenticated', 'true');
-    alert('Login successful!');
-    localStorage.setItem('userEmail', email);
+    sessionStorage.setItem('userEmail', email);
+    sessionStorage.setItem('firstName', data.first_name); // Assuming the data object has first_name
+    sessionStorage.setItem('lastName', data.last_name); // Assuming the data object has role
 
+    alert('Login successful!');
     navigate('/home');  // Directing all users to a common 'home' route
     setIsLoggingIn(false);
   } catch (error) {
@@ -58,6 +61,7 @@ const handleSubmit = async (e) => {
     setIsLoggingIn(false);
   }
 };
+
 
 
 
