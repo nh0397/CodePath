@@ -3,11 +3,12 @@ import './HomePage.css';
 import Modal from '../../contexts/Modal';
 import apiServices from '../../services/apiServices';
 import PostInfo from '../PostInfo/PostInfo';
+import ExpandedPostView from '../ExpandedPostView/ExpandedPostView'; // Import the expanded view component
 
 function HomePage(props) {
     const { modalOpen, toggleModal } = props;
     const [posts, setPosts] = useState([]);
-    const [isLoading, setIsLoading] = useState(true); // State to track loading state
+    const [selectedPost, setSelectedPost] = useState(null); // Track the selected post
 
     useEffect(() => {
         // Fetch posts data when the component mounts
@@ -22,7 +23,6 @@ function HomePage(props) {
                 return;
             }
             setPosts(data);
-            setIsLoading(false); // Set loading state to false once posts are fetched
         } catch (error) {
             console.error('Error fetching posts:', error.message);
         }
@@ -36,6 +36,9 @@ function HomePage(props) {
         toggleModal(false);
     };
 
+    const handlePostClick = (post) => {
+        setSelectedPost(post);
+    };
     const handleSubmit = async (userId, title, description, imageUrl) => {
         const { error } = await apiServices.addPost(userId, title, description, imageUrl);
         if (error) {
@@ -54,22 +57,17 @@ function HomePage(props) {
                 <Modal onSubmit={handleSubmit} onClose={closeModal}>
                 </Modal>
             )}
-
-            {isLoading ? ( // Check if loading state is true
-                <div className="loading-message">
-                    Loading... {/* Display loading message */}
-                </div>
-            ) : posts.length === 0 ? ( // Check if there are no posts
-                <div className="no-posts-message">
-                    <span role="img" aria-label="superman emoji">🦸‍♂️</span> 
-                    No Discussions Yet! <br></br>
-                    Be the first one to start.
-                </div>
-            ) : ( // Render posts if there are any
+            {selectedPost && (
+                <ExpandedPostView
+                    post={selectedPost}
+                    onClose={() => setSelectedPost(null)} // Close the expanded view
+                />
+            )}
+            {!selectedPost && (
                 <div className="post-container">
-                    {posts.map(post => (
+                {posts.map(post => (
+                    <div key={post.id} onClick={() => handlePostClick(post)}>
                         <PostInfo
-                            key={post.id}
                             title={post.title}
                             description={post.description}
                             firstName={post.users.first_name}
@@ -77,8 +75,9 @@ function HomePage(props) {
                             likes={post.likes}
                             dislikes={post.dislikes}
                         />
-                    ))}
-                </div>
+                    </div>
+                ))}
+            </div>
             )}
         </div>
     );

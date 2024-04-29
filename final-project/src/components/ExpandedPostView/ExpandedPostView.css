@@ -1,0 +1,116 @@
+/* ExpandedPostView.css */
+
+.expanded-post-view {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 600px; /* Adjust as needed */
+    margin: 0 auto;
+}
+
+.post-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    color: black;
+}
+
+.close-btn, .delete-btn {
+    background-color: #ccc;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.post-details {
+    justify-content: center;
+    display: flex;
+    gap: 20px;
+
+}
+
+
+
+.post-info {
+    flex: 1;
+}
+
+.info-row {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+
+.btn-group {
+    margin-top: 20px;
+}
+
+.btn-group button {
+    margin-right: 10px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: black;
+    cursor: pointer;
+}
+
+.btn-group button:hover {
+    background-color: #0056b3;
+}
+
+.delete-btn:hover {
+    background-color: #d35b5b;
+}
+
+.expand-image{
+    height: 200px;
+    width: 300px;
+}
+.close-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    gap: 10px;
+}
+
+.info-row{
+    color: black;
+}
+
+.info-row-parent{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.like-btn {
+    background-color: blue;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+  }
+  
+  .dislike-btn {
+    background-color: red;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  .like-count,
+  .dislike-count {
+    margin-left: 5px;
+  }
